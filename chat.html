@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeXo Chat - Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h2>NeXo Chat</h2>
+                </div>
+                <div class="user-profile" onclick="window.location.href='profil.html'">
+                    <img id="sidebarProfilePic" src="https://via.placeholder.com/40" alt="Profile">
+                    <div class="user-info">
+                        <h3 id="sidebarUserName">Nama Pengguna</h3>
+                        <span id="sidebarUserStatus">Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari percakapan..." id="searchConversation">
+                </div>
+            </div>
+            
+            <div class="conversations" id="conversationsList">
+                <!-- Conversations will be loaded here -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="btn-icon" onclick="window.location.href='caripengguna.html'" title="Cari Pengguna">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn-icon" onclick="window.location.href='memoriyangsudahdigunakan.html'" title="Memori">
+                    <i class="fas fa-database"></i>
+                </button>
+                <button class="btn-icon" onclick="logout()" title="Keluar">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header" id="chatHeader">
+                <div class="chat-contact">
+                    <img id="currentChatProfilePic" src="https://via.placeholder.com/40" alt="Profile">
+                    <div class="contact-info">
+                        <h3 id="currentChatName">Pilih percakapan</h3>
+                        <span id="currentChatStatus">Mulai chatting dengan memilih kontak</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn-icon" id="voiceCallBtn" title="Panggilan Suara">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button class="btn-icon" id="videoCallBtn" title="Panggilan Video">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="btn-icon" title="Info">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be loaded here -->
+                <div class="empty-chat">
+                    <i class="fas fa-comments"></i>
+                    <h3>Selamat datang di NeXo Chat</h3>
+                    <p>Pilih kontak dari daftar percakapan atau cari pengguna baru untuk memulai chatting</p>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <button class="btn-icon" id="attachFileBtn" title="Lampirkan File">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <input type="file" id="fileInput" style="display: none;">
+                
+                <div class="input-group">
+                    <input type="text" id="messageInput" placeholder="Ketik pesan..." disabled>
+                    <button class="btn-icon" id="emojiBtn" title="Emoji">
+                        <i class="far fa-smile"></i>
+                    </button>
+                </div>
+                
+                <button class="btn-icon btn-send" id="sendMessageBtn" title="Kirim" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="filePreviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pratinjau File</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="filePreview"></div>
+                <div class="file-info">
+                    <p id="fileName"></p>
+                    <p id="fileSize"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelFileBtn">Batal</button>
+                <button class="btn btn-primary" id="sendFileBtn">Kirim</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="editMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Pesan</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <textarea id="editMessageInput" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelEditBtn">Batal</button>
+                <button class="btn btn-primary" id="saveEditBtn">Simpan</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>
