@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panggilan - NeXo Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="call-container">
+        <div class="call-header">
+            <div class="call-info">
+                <img id="callerProfilePic" src="https://via.placeholder.com/50" alt="Profile">
+                <div>
+                    <h3 id="callerName">Nama Pemanggil</h3>
+                    <p id="callStatus">Memanggil...</p>
+                </div>
+            </div>
+            <div class="call-time" id="callTime">00:00</div>
+        </div>
+        
+        <div class="call-content">
+            <div class="video-container">
+                <video id="localVideo" autoplay muted playsinline></video>
+                <video id="remoteVideo" autoplay playsinline></video>
+            </div>
+            
+            <div class="call-controls">
+                <button class="btn-icon" id="muteBtn" title="Bisukan">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="btn-icon" id="videoToggleBtn" title="Matikan Video">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="btn-icon btn-danger" id="endCallBtn" title="Akhiri Panggilan">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+                <button class="btn-icon" id="screenShareBtn" title="Bagikan Layar">
+                    <i class="fas fa-desktop"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="incomingCallModal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="incoming-call-info">
+                    <img id="incomingCallerProfilePic" src="https://via.placeholder.com/100" alt="Profile">
+                    <h3 id="incomingCallerName">Nama Pemanggil</h3>
+                    <p id="incomingCallType">Panggilan Video Masuk...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="rejectCallBtn">
+                    <i class="fas fa-phone-slash"></i> Tolak
+                </button>
+                <button class="btn btn-success" id="acceptCallBtn">
+                    <i class="fas fa-phone"></i> Terima
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>
