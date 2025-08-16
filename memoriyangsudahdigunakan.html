@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memori - NeXo Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h2>NeXo Chat</h2>
+                </div>
+                <div class="user-profile" onclick="window.location.href='profil.html'">
+                    <img id="sidebarProfilePic" src="https://via.placeholder.com/40" alt="Profile">
+                    <div class="user-info">
+                        <h3 id="sidebarUserName">Nama Pengguna</h3>
+                        <span id="sidebarUserStatus">Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari percakapan..." id="searchConversation">
+                </div>
+            </div>
+            
+            <div class="conversations" id="conversationsList">
+                <!-- Conversations will be loaded here -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="btn-icon" onclick="window.location.href='caripengguna.html'" title="Cari Pengguna">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn-icon active" onclick="window.location.href='memoriyangsudahdigunakan.html'" title="Memori">
+                    <i class="fas fa-database"></i>
+                </button>
+                <button class="btn-icon" onclick="logout()" title="Keluar">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Memory Area -->
+        <div class="memory-area">
+            <div class="memory-header">
+                <button class="btn-icon back-btn" onclick="window.location.href='chat.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Penggunaan Memori</h2>
+            </div>
+            
+            <div class="memory-content">
+                <div class="memory-overview">
+                    <div class="memory-card">
+                        <div class="memory-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="memory-info">
+                            <h3>Total Memori</h3>
+                            <div class="memory-bar">
+                                <div class="memory-progress" id="totalMemoryProgress"></div>
+                            </div>
+                            <p><span id="usedMemory">0</span> MB dari <span id="totalMemory">100</span> MB (<span id="memoryPercentage">0</span>%)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-comments"></i>
+                            <h4>Pesan</h4>
+                            <p><span id="totalMessages">0</span> pesan</p>
+                            <p><span id="messagesMemory">0</span> MB</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h4>File</h4>
+                            <p><span id="totalFiles">0</span> file</p>
+                            <p><span id="filesMemory">0</span> MB</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-image"></i>
+                            <h4>Foto Profil</h4>
+                            <p><span id="profilePicSize">0</span> MB</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memory-details">
+                    <h3>Detail Penggunaan</h3>
+                    
+                    <div class="memory-tabs">
+                        <button class="tab-btn active" data-tab="files">File</button>
+                        <button class="tab-btn" data-tab="messages">Pesan</button>
+                        <button class="tab-btn" data-tab="chats">Percakapan</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="files-tab">
+                        <div class="memory-filter">
+                            <div class="input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Cari file..." id="searchFiles">
+                            </div>
+                            <div class="filter-options">
+                                <select id="fileTypeFilter">
+                                    <option value="all">Semua Tipe</option>
+                                    <option value="image">Gambar</option>
+                                    <option value="document">Dokumen</option>
+                                    <option value="video">Video</option>
+                                    <option value="audio">Audio</option>
+                                    <option value="other">Lainnya</option>
+                                </select>
+                                <select id="sortBy">
+                                    <option value="newest">Terbaru</option>
+                                    <option value="oldest">Terlama</option>
+                                    <option value="largest">Terbesar</option>
+                                    <option value="smallest">Terkecil</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="files-list" id="filesList">
+                            <!-- Files will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat file...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="messages-tab">
+                        <div class="memory-filter">
+                            <div class="input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Cari pesan..." id="searchMessages">
+                            </div>
+                            <div class="filter-options">
+                                <select id="chatFilter">
+                                    <option value="all">Semua Percakapan</option>
+                                    <!-- Chat options will be loaded here -->
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="messages-list" id="messagesList">
+                            <!-- Messages will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat pesan...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="chats-tab">
+                        <div class="memory-filter">
+                            <div class="input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Cari percakapan..." id="searchChats">
+                            </div>
+                        </div>
+                        
+                        <div class="chats-list" id="chatsList">
+                            <!-- Chats will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat percakapan...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memory-actions">
+                    <h3>Kelola Memori</h3>
+                    <div class="action-cards">
+                        <div class="action-card">
+                            <i class="fas fa-trash-alt"></i>
+                            <h4>Hapus File Besar</h4>
+                            <p>Hapus file yang lebih besar dari 10MB</p>
+                            <button class="btn btn-danger" id="deleteLargeFilesBtn">Hapus Sekarang</button>
+                        </div>
+                        
+                        <div class="action-card">
+                            <i class="fas fa-broom"></i>
+                            <h4>Bersihkan Percakapan Lama</h4>
+                            <p>Hapus percakapan yang tidak aktif selama 6 bulan</p>
+                            <button class="btn btn-danger" id="cleanOldChatsBtn">Bersihkan</button>
+                        </div>
+                        
+                        <div class="action-card">
+                            <i class="fas fa-compress-alt"></i>
+                            <h4>Kompres Media</h4>
+                            <p>Kompres gambar dan video untuk menghemat ruang</p>
+                            <button class="btn btn-primary" id="compressMediaBtn">Kompres Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="filePreviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pratinjau File</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="filePreview"></div>
+                <div class="file-info">
+                    <p id="fileName"></p>
+                    <p id="fileSize"></p>
+                    <p id="fileDate"></p>
+                    <p id="fileChat"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closePreviewBtn">Tutup</button>
+                <button class="btn btn-danger" id="deleteFileBtn">Hapus File</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="confirmDeleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Konfirmasi Hapus</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDeleteMessage">Apakah Anda yakin ingin menghapus item ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelDeleteBtn">Batal</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Pengguna - NeXo Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h2>NeXo Chat</h2>
+                </div>
+                <div class="user-profile" onclick="window.location.href='profil.html'">
+                    <img id="sidebarProfilePic" src="https://via.placeholder.com/40" alt="Profile">
+                    <div class="user-info">
+                        <h3 id="sidebarUserName">Nama Pengguna</h3>
+                        <span id="sidebarUserStatus">Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari percakapan..." id="searchConversation">
+                </div>
+            </div>
+            
+            <div class="conversations" id="conversationsList">
+                <!-- Conversations will be loaded here -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="btn-icon active" onclick="window.location.href='caripengguna.html'" title="Cari Pengguna">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn-icon" onclick="window.location.href='memoriyangsudahdigunakan.html'" title="Memori">
+                    <i class="fas fa-database"></i>
+                </button>
+                <button class="btn-icon" onclick="logout()" title="Keluar">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Search User Area -->
+        <div class="search-user-area">
+            <div class="search-header">
+                <button class="btn-icon back-btn" onclick="window.location.href='chat.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Cari Pengguna</h2>
+            </div>
+            
+            <div class="search-user-content">
+                <div class="search-bar">
+                    <div class="input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchUserInput" placeholder="Cari berdasarkan nama atau email...">
+                    </div>
+                </div>
+                
+                <div class="search-tabs">
+                    <button class="tab-btn active" data-tab="all">Semua</button>
+                    <button class="tab-btn" data-tab="contacts">Kontak</button>
+                    <button class="tab-btn" data-tab="suggestions">Saran</button>
+                </div>
+                
+                <div class="search-results">
+                    <div class="tab-content active" id="all-users">
+                        <h3>Semua Pengguna</h3>
+                        <div class="user-list" id="allUsersList">
+                            <!-- Users will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat pengguna...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="contacts">
+                        <h3>Kontak Saya</h3>
+                        <div class="user-list" id="contactsList">
+                            <!-- Contacts will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat kontak...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="suggestions">
+                        <h3>Saran Pengguna</h3>
+                        <div class="user-list" id="suggestionsList">
+                            <!-- Suggestions will be loaded here -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Memuat saran...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="userProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Profil Pengguna</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="user-profile-detail">
+                    <img id="modalUserProfilePic" src="https://via.placeholder.com/100" alt="Profile">
+                    <h3 id="modalUserName">Nama Pengguna</h3>
+                    <p id="modalUserEmail">email@example.com</p>
+                    <p id="modalUserStatus">Status pengguna</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeProfileBtn">Tutup</button>
+                <button class="btn btn-primary" id="startChatBtn">Mulai Chat</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - NeXo Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h2>NeXo Chat</h2>
+                </div>
+                <div class="user-profile" onclick="window.location.href='profil.html'">
+                    <img id="sidebarProfilePic" src="https://via.placeholder.com/40" alt="Profile">
+                    <div class="user-info">
+                        <h3 id="sidebarUserName">Nama Pengguna</h3>
+                        <span id="sidebarUserStatus">Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari percakapan..." id="searchConversation">
+                </div>
+            </div>
+            
+            <div class="conversations" id="conversationsList">
+                <!-- Conversations will be loaded here -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="btn-icon" onclick="window.location.href='caripengguna.html'" title="Cari Pengguna">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn-icon" onclick="window.location.href='memoriyangsudahdigunakan.html'" title="Memori">
+                    <i class="fas fa-database"></i>
+                </button>
+                <button class="btn-icon" onclick="logout()" title="Keluar">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Profile Area -->
+        <div class="profile-area">
+            <div class="profile-header">
+                <button class="btn-icon back-btn" onclick="window.location.href='chat.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Profil Saya</h2>
+            </div>
+            
+            <div class="profile-content">
+                <div class="profile-picture-container">
+                    <div class="profile-picture">
+                        <img id="profilePicture" src="https://via.placeholder.com/150" alt="Profile Picture">
+                        <div class="edit-profile-picture" onclick="document.getElementById('profilePictureInput').click()">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+                    <p>Maksimal 30MB</p>
+                </div>
+                
+                <form id="profileForm" class="profile-form">
+                    <div class="form-group">
+                        <label for="profileName">Nama</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="profileName" placeholder="Nama Anda" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileEmail">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="profileEmail" placeholder="Email Anda" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileStatus">Status</label>
+                        <div class="input-group">
+                            <i class="fas fa-info-circle"></i>
+                            <input type="text" id="profileStatus" placeholder="Status Anda">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profilePhone">Nomor Telepon</label>
+                        <div class="input-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="profilePhone" placeholder="Nomor Telepon">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <button type="button" class="btn btn-secondary" onclick="resetProfileForm()">Batal</button>
+                    </div>
+                </form>
+                
+                <div class="profile-settings">
+                    <h3>Pengaturan Akun</h3>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-lock"></i>
+                                <div>
+                                    <h4>Ubah Kata Sandi</h4>
+                                    <p>Perbarui kata sandi akun Anda</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline" id="changePasswordBtn">Ubah</button>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-bell"></i>
+                                <div>
+                                    <h4>Notifikasi</h4>
+                                    <p>Kelola notifikasi aplikasi</p>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="notificationToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-moon"></i>
+                                <div>
+                                    <h4>Mode Gelap</h4>
+                                    <p>Aktifkan tema gelap</p>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>Privasi</h4>
+                                    <p>Kelola pengaturan privasi Anda</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline" id="privacySettingsBtn">Kelola</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="danger-zone">
+                    <h3>Zona Berbahaya</h3>
+                    <div class="danger-actions">
+                        <button class="btn btn-danger" id="deleteAccountBtn">Hapus Akun</button>
+                        <button class="btn btn-danger" id="logoutAllBtn">Keluar dari Semua Perangkat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ubah Kata Sandi</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Kata Sandi Saat Ini</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="currentPassword" placeholder="Masukkan kata sandi saat ini" required>
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('currentPassword')"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">Kata Sandi Baru</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="newPassword" placeholder="Masukkan kata sandi baru" required>
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Konfirmasi Kata Sandi Baru</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmNewPassword" placeholder="Konfirmasi kata sandi baru" required>
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmNewPassword')"></i>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelChangePasswordBtn">Batal</button>
+                <button class="btn btn-primary" id="savePasswordBtn">Simpan</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="deleteAccountModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Hapus Akun</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan dan semua data Anda akan dihapus secara permanen.</p>
+                <div class="form-group">
+                    <label for="deletePassword">Masukkan kata sandi untuk konfirmasi</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="deletePassword" placeholder="Kata sandi" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('deletePassword')"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelDeleteBtn">Batal</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Hapus Akun</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>

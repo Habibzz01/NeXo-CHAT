@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeXo Chat - Aplikasi Chat Real-time</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="landing-page">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h1>NeXo Chat</h1>
+                <p>Platform chatting real-time terdepan</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Cepat & Real-time</h3>
+                    <p>Pesan terkirim secara instan dengan teknologi Firebase Real-time Database</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Aman & Terenkripsi</h3>
+                    <p>Data Anda aman dengan enkripsi end-to-end</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Bagikan File</h3>
+                    <p>Bagikan berbagai jenis file hingga 50MB</p>
+                </div>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-primary">Masuk</a>
+                <a href="daftar.html" class="btn btn-secondary">Daftar</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lupa Kata Sandi - NeXo Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h1>NeXo Chat</h1>
+                <p>Atur ulang kata sandi Anda</p>
+            </div>
+            
+            <form id="forgotPasswordForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Masukkan email Anda" required>
+                    </div>
+                </div>
+                
+                <p class="info-text">Kami akan mengirimkan tautan untuk mengatur ulang kata sandi ke email Anda.</p>
+                
+                <button type="submit" class="btn btn-primary">Kirim Tautan</button>
+                
+                <p class="auth-switch">
+                    Ingat kata sandi Anda? <a href="login.html">Masuk</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="dbs.js"></script>
+    <script src="sc.js"></script>
+</body>
+</html>
